@@ -1,32 +1,45 @@
-import type { FC } from 'react';
+import { collection, getDocs } from 'firebase/firestore/lite'
+import { type FC, useEffect, useState } from 'react'
 
-import { Link } from '~/components/Link/Link.tsx';
-import { Page } from '~/components/Page/Page.tsx';
-import { routes } from '~/navigation/routes.tsx';
+import { Header } from '~/components/Header'
+import { Page } from '~/components/Page/Page.tsx'
+import { Post } from '~/components/Post'
+import db from '~/firebase'
 
-import './IndexPage.css';
+import './IndexPage.css'
 
 export const IndexPage: FC = () => {
+  const [posts, setPosts] = useState<any[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const getPosts = async () => {
+      setLoading(true)
+      const postsCol = collection(db, 'posts')
+      const postSnapshot = await getDocs(postsCol)
+      const postList = postSnapshot.docs.map((doc) => doc.data())
+      setPosts(postList)
+      setLoading(false)
+    };
+    try {
+      getPosts()
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+
   return (
-    <Page title="Home Page">
-      <p>
-        This page is a home page in this boilerplate. You can use the links below to visit other
-        pages with their own functionality.
-      </p>
-      <ul className="index-page__links">
-        {routes.map(({ path, title, icon }) => title && (
-          <li className="index-page__link-item" key={path}>
-            <Link className="index-page__link" to={path}>
-              {icon && (
-                <i className="index-page__link-icon">
-                  {icon}
-                </i>
-              )}
-              {title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <Page>
+      <Header />
+      {!loading ?
+      posts.map((post) => (
+        <Post
+          body={post?.body}
+          date={post?.createdAt?.toDate()}
+          author={post?.author}
+        />
+      ))
+    : 'SPINNER IS ALSO LOADING...'}
     </Page>
   );
-};
+}

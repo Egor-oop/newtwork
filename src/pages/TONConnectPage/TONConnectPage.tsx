@@ -77,4 +77,4 @@ export const TONConnectPage: FC = () => {
       </div>
     </Page>
   );
-};
+}

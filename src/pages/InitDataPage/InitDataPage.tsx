@@ -127,4 +127,4 @@ export const InitDataPage: FC = () => {
       {contentNode}
     </Page>
   );
-};
+}

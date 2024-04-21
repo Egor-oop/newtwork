@@ -102,5 +102,6 @@ module.exports = {
         [/\.css$/.source],
       ],
     }],
+    semi: ['error', 'never']
   },
 };

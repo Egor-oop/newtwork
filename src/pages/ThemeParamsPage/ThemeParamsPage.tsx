@@ -36,4 +36,4 @@ export const ThemeParamsPage: FC = () => {
       />
     </Page>
   );
-};
+}

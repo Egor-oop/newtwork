@@ -3,7 +3,7 @@ import type { FC, PropsWithChildren, ReactNode } from 'react';
 import './Page.css';
 
 export interface PageProps extends PropsWithChildren {
-  title: string;
+  title?: string;
   disclaimer?: ReactNode;
 }
 
@@ -15,4 +15,4 @@ export const Page: FC<PageProps> = ({ title, children, disclaimer }) => {
       {children}
     </div>
   );
-};
+}

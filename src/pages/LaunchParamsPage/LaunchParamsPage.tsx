@@ -35,4 +35,4 @@ export const LaunchParamsPage: FC = () => {
       />
     </Page>
   );
-};
+}

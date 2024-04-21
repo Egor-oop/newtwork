@@ -39,4 +39,4 @@ export const DisplayData: FC<DisplayDataProps> = ({ rows }) => {
       })}
     </div>
   );
-};
+}

@@ -20,4 +20,4 @@ export const RGB: FC<RGBProps> = (props) => {
       {color}
     </span>
   );
-};
+}

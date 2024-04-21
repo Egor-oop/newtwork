@@ -44,4 +44,4 @@ export const Link: FC<LinkProps> = (props) => {
       className={classNames(className, 'link')}
     />
   );
-};
+}
